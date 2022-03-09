@@ -905,7 +905,7 @@ def verify_image_label(args):
         if os.path.isfile(lb_file):
             nf = 1  # label found
             with open(lb_file) as f:
-                lb = [x.split() for x in f.read().strip().splitlines() if len(x)]
+                lb = [x.split() for x in f.read().strip().splitlines() if len(x) and "0" in x[0] and len(x[0])==1]
                 if any([len(x) > 8 for x in lb]):  # is segment
                     classes = np.array([x[0] for x in lb], dtype=np.float32)
                     segments = [np.array(x[1:], dtype=np.float32).reshape(-1, 2) for x in lb]  # (cls, xy1...)
